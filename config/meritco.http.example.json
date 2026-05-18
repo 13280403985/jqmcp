@@ -1,0 +1,45 @@
+{
+  "_comment": "复制到项目根目录 meritco.http.json。抓包里的「首条搜索请求」对应 createTask；「反复出现直到结束」的请求对应 poll。",
+  "baseUrl": "https://research.meritco-group.com",
+  "_defaultHeaders说明": "与 DevTools 中 meritco-chatgpt 请求一致；Token 用 MERITCO_TOKEN 注入勿写在此",
+  "defaultHeaders": {
+    "Accept": "application/json, text/plain, */*",
+    "Accept-Language": "zh-CN",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Origin": "https://research.meritco-group.com",
+    "Referer": "https://research.meritco-group.com/",
+    "X-User-Type": "default",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0"
+  },
+  "createTask": {
+    "_path说明": "smartWords/get 抓包多为 JSON 字段 query（不是 words）；若你环境仍用 words 可改回",
+    "_traceId说明": "需要时在 body 中加 \"traceId\": \"{{traceId}}\"，由 MCP 每次搜索自动生成",
+    "path": "/meritco-chatgpt/smartWords/get",
+    "method": "POST",
+    "body": {
+      "query": "{{query}}"
+    },
+    "responseTaskIdPath": "result.id",
+    "_responseTaskIdPath说明": "在首条响应 JSON 里点开找到任务/会话 id，写成点号路径，如 data.taskId、result.sessionId",
+    "afterCreate": "poll",
+    "_afterCreate说明": "poll=首包只取 id 再轮询；extract=无轮询，首包直接用 extractBody.path 取正文（同步接口）"
+  },
+  "poll": {
+    "_pathTemplate说明": "把抓包里轮询请求的 URL 路径抄下来，把变化的那段换成 {{taskId}}；也可含 {{query}}",
+    "pathTemplate": "/meritco-chatgpt/smartWords/status/{{taskId}}",
+    "method": "GET",
+    "intervalMs": 1200,
+    "maxAttempts": 120,
+    "completedWhen": {
+      "_说明": "填 equals 或 in 二选一。path 为状态字段的点号路径",
+      "path": "data.status",
+      "equals": "done"
+    }
+  },
+  "extractBody": {
+    "_说明": "生成结束后，正文所在字段的点号路径",
+    "_auxiliaryAsResult": "smartWords/get 仅返回联想词时设 true，可直接得到与「辅助搜索」同源的格式化文本；要长文报告则 false 并配 poll",
+    "path": "data.content",
+    "auxiliaryAsResult": false
+  }
+}

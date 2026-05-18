@@ -1,0 +1,33 @@
+{
+  "_comment": "复制为根目录 meritco.playwright.json，并设 MERITCO_MODE=playwright。长回答若提前结束：调大 stableConsecutiveNeeded 或 minStableTextLength，或配置 doneSelector。只返回答案正文：preferPlainAnswerSection:true（默认）靠「正文」标题截取；stripDomSelectors 填深度思考容器的相对子选择器更干净。",
+  "_bodySelector说明": "正文在 .flex-content.mask-bottom 内与工具栏同级的 > .main-wrapper。",
+  "startUrl": "https://research.meritco-group.com/report/custom/bot",
+  "cookieDomain": ".meritco-group.com",
+  "cookiePath": "/",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0",
+  "searchInputSelector": "textarea[placeholder*='输入任何你想了解']",
+  "searchInputSelectors": [
+    "textarea[placeholder*='你想了解']",
+    "textarea[placeholder*='输入']",
+    "div[contenteditable='true']"
+  ],
+  "submitWithEnter": true,
+  "bodySelector": ".flex-content.mask-bottom > .main-wrapper",
+  "_extractSelector说明": "可选：相对 main-wrapper 内只取红框正文；不需要则删除本字段",
+  "waitUntil": "load",
+  "dismissAuxiliaryText": "跳过",
+  "afterSubmitPauseMs": 1500,
+  "minStableTextLength": 250,
+  "stablePollMs": 2000,
+  "stableConsecutiveNeeded": 5,
+  "waitUntilSearchInputShowsQuery": true,
+  "searchInputQueryMatchMinMs": 4000,
+  "searchInputQueryPollMs": 800,
+  "waitForBodyStableAfterSearchInput": true,
+  "scrollBodyToBottomBeforeRead": true,
+  "preferPlainAnswerSection": true,
+  "stripDomSelectors": [],
+  "navigationTimeoutMs": 90000,
+  "generationTimeoutMs": 300000,
+  "headless": true
+}

@@ -1,0 +1,36 @@
+{
+  "name": "jqmcp",
+  "version": "1.0.0",
+  "description": "MCP：久谦平台通用搜索（Playwright + HTTP 历史接口）",
+  "type": "module",
+  "main": "dist/server.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "gateway": "node dist/meritcoGatewayServer.js",
+    "query": "node scripts/run-query.mjs",
+    "query:pw": "node scripts/run-query-playwright.mjs",
+    "query:uni": "node scripts/run-universal.mjs",
+    "sync:env": "node dist/syncMeritcoEnvFromPlaywright.js",
+    "meritco:profile": "node dist/meritcoProfileBrowser.js",
+    "playwright:install": "playwright install chromium"
+  },
+  "keywords": [
+    "mcp",
+    "meritco"
+  ],
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "playwright": "^1.59.1",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "typescript": "^6.0.3"
+  }
+}

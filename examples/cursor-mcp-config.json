@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "jqmcp": {
+      "command": "node",
+      "args": ["C:/Users/ASUS/Desktop/JQMCP/dist/server.js"],
+      "env": {
+        "MERITCO_CONFIG_DIR": "C:/Users/ASUS/Desktop/JQMCP"
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.env
+meritco.local.env
+meritco-auth.json
+meritco-chromium-profile/
+meritco.http.json
+meritco.playwright.json
+*.har

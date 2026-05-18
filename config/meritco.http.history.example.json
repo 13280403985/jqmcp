@@ -1,0 +1,32 @@
+{
+  "_comment": "与 Network 请求负载对齐示例：conversationId + category（DEEP_RESEARCH_SM）。复制为项目根 meritco.http.json。path 以你抓到的 URL 为准。",
+  "baseUrl": "https://research.meritco-group.com",
+  "defaultHeaders": {
+    "Accept": "application/json, text/plain, */*",
+    "Accept-Language": "zh-CN",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Origin": "https://research.meritco-group.com",
+    "Referer": "https://research.meritco-group.com/",
+    "X-User-Type": "default",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0"
+  },
+  "createTask": {
+    "path": "/meritco-chatgpt/history/get",
+    "method": "POST",
+    "body": {
+      "conversationId": "{{conversationId}}",
+      "category": "{{category}}"
+    },
+    "bodyNumericFields": ["conversationId"],
+    "afterCreate": "extract",
+    "completedWhen": {
+      "path": "code",
+      "in": ["200", "0"]
+    },
+    "pollIfExtractEmpty": false
+  },
+  "extractBody": {
+    "path": "result",
+    "asJson": true
+  }
+}
