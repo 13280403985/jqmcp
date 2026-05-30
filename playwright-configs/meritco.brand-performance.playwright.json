@@ -1,0 +1,42 @@
+{
+  "_comment": "品牌定位与业绩：https://research.meritco-group.com/report/databank/brand — 单输入框 + 回车。报告聚焦：品牌定位/价格带/品类站位 + 业绩盘点（声量、销量、增长、份额、复购等）。stripBeforeAny 留空。",
+  "startUrl": "https://research.meritco-group.com/report/databank/brand",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0",
+  "searchInputSelectors": [
+    "input[placeholder*='请输入品牌']",
+    "input[placeholder*='请输入品类']",
+    "input[placeholder*='品牌/品类']",
+    "input[placeholder*='品牌']",
+    "input[placeholder*='品类']",
+    "input[placeholder*='关键词']",
+    "input[placeholder*='请输入']",
+    "input[type='text']",
+    "textarea[placeholder*='品牌']",
+    "textarea[placeholder*='品类']",
+    "textarea[placeholder*='关键词']",
+    "textarea[placeholder*='请输入']"
+  ],
+  "submitWithEnter": true,
+  "submitSelector": null,
+  "waitUntil": "load",
+  "afterSubmitPauseMs": 1500,
+  "dismissAuxiliaryText": null,
+  "dismissAuxiliaryWaitMs": 30000,
+  "postDismissPauseMs": 4000,
+  "navigationTimeoutMs": 90000,
+  "generationTimeoutMs": 600000,
+  "bodySelector": "main, .main, .content, [class*='main'], [class*='content'], #app",
+  "extractSelector": null,
+  "minStableTextLength": 400,
+  "stablePollMs": 2500,
+  "stableConsecutiveNeeded": 5,
+  "scrollBodyToBottomBeforeRead": true,
+  "stripDomSelectors": [
+    "nav",
+    "aside",
+    "[class*='sider']",
+    "[class*='menu']",
+    "[class*='header']"
+  ],
+  "stripBeforeAny": []
+}

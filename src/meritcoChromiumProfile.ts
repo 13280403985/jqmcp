@@ -6,10 +6,10 @@ import { resolveConfigDir } from "./httpConfig.js";
 export const MERITCO_CHROMIUM_PROFILE_DIRNAME = "meritco-chromium-profile";
 
 /**
- * 是否使用「内置 Chromium 用户目录」代替每次无痕上下文 + Cookie/Token。
- * - 设 `MERITCO_USE_PERSIST_PROFILE=1`：目录为 `{MERITCO_CONFIG_DIR}/meritco-chromium-profile`（或 cwd）。
- * - 或设 `MERITCO_CHROMIUM_USER_DATA=绝对/相对路径` 自定义目录（此时不必再设 USE_PERSIST）。
- * - 设 `MERITCO_USE_PERSIST_PROFILE=0`：显式关闭，即使曾用过持久目录。
+ * 通用查询默认使用「内置 Chromium 用户目录」（profile 登录态），避免 Agent 回退到 Cookie/Token 方案。
+ * - 默认：目录为 `{MERITCO_CONFIG_DIR}/meritco-chromium-profile`（或 cwd）。
+ * - `MERITCO_CHROMIUM_USER_DATA=绝对/相对路径`：自定义目录。
+ * - `MERITCO_USE_PERSIST_PROFILE=0`：显式关闭持久化（仅兼容旧路径，不推荐）。
  */
 export function resolveChromiumUserDataDirForPlaywright(): string | null {
   const off = process.env.MERITCO_USE_PERSIST_PROFILE?.trim().toLowerCase();
@@ -17,13 +17,7 @@ export function resolveChromiumUserDataDirForPlaywright(): string | null {
 
   const custom = process.env.MERITCO_CHROMIUM_USER_DATA?.trim();
   if (custom) return resolve(custom);
-
-  const on = process.env.MERITCO_USE_PERSIST_PROFILE?.trim().toLowerCase();
-  if (on === "1" || on === "true" || on === "on") {
-    return join(resolveConfigDir(), MERITCO_CHROMIUM_PROFILE_DIRNAME);
-  }
-
-  return null;
+  return join(resolveConfigDir(), MERITCO_CHROMIUM_PROFILE_DIRNAME);
 }
 
 /** 供「仅打开登录窗口」脚本使用：始终指向可写目录（与启用持久化时的默认一致） */

@@ -1,0 +1,43 @@
+{
+  "_comment": "品类动态与机会：https://research.meritco-group.com/report/databank/cate — 单输入框 + 回车；同款单阶段。报告聚焦：品类整体动态、增长机会、细分赛道、品类天花板与新兴趋势。stripBeforeAny 留空。",
+  "startUrl": "https://research.meritco-group.com/report/databank/cate",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0",
+  "searchInputSelectors": [
+    "input[placeholder*='请输入品类']",
+    "input[placeholder*='请输入品牌']",
+    "input[placeholder*='品类/品牌']",
+    "input[placeholder*='品类']",
+    "input[placeholder*='赛道']",
+    "input[placeholder*='品牌']",
+    "input[placeholder*='关键词']",
+    "input[placeholder*='请输入']",
+    "input[type='text']",
+    "textarea[placeholder*='品类']",
+    "textarea[placeholder*='品牌']",
+    "textarea[placeholder*='关键词']",
+    "textarea[placeholder*='请输入']"
+  ],
+  "submitWithEnter": true,
+  "submitSelector": null,
+  "waitUntil": "load",
+  "afterSubmitPauseMs": 1500,
+  "dismissAuxiliaryText": null,
+  "dismissAuxiliaryWaitMs": 30000,
+  "postDismissPauseMs": 4000,
+  "navigationTimeoutMs": 90000,
+  "generationTimeoutMs": 600000,
+  "bodySelector": "main, .main, .content, [class*='main'], [class*='content'], #app",
+  "extractSelector": null,
+  "minStableTextLength": 400,
+  "stablePollMs": 2500,
+  "stableConsecutiveNeeded": 5,
+  "scrollBodyToBottomBeforeRead": true,
+  "stripDomSelectors": [
+    "nav",
+    "aside",
+    "[class*='sider']",
+    "[class*='menu']",
+    "[class*='header']"
+  ],
+  "stripBeforeAny": []
+}

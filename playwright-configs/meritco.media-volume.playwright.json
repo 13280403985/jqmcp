@@ -1,0 +1,40 @@
+{
+  "_comment": "声量：https://research.meritco-group.com/report/media_volume — 单输入框 + 回车。★ 特殊查询语法 ★：多个词之间『是』的关系用『双空格』分隔，『或』的关系用『双分号』分隔。报告聚焦：关键词在社媒（微博/小红书/抖音）的声量、帖子数、互动趋势。stripBeforeAny 留空。",
+  "startUrl": "https://research.meritco-group.com/report/media_volume",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0",
+  "searchInputSelectors": [
+    "input[placeholder*='请输入查询词']",
+    "input[placeholder*='请输入']",
+    "input[placeholder*='查询词']",
+    "input[placeholder*='关键词']",
+    "input[placeholder*='声量']",
+    "input[type='text']",
+    "textarea[placeholder*='请输入查询词']",
+    "textarea[placeholder*='请输入']",
+    "textarea[placeholder*='查询词']",
+    "textarea[placeholder*='关键词']"
+  ],
+  "submitWithEnter": true,
+  "submitSelector": null,
+  "waitUntil": "load",
+  "afterSubmitPauseMs": 1500,
+  "dismissAuxiliaryText": null,
+  "dismissAuxiliaryWaitMs": 30000,
+  "postDismissPauseMs": 4000,
+  "navigationTimeoutMs": 90000,
+  "generationTimeoutMs": 600000,
+  "bodySelector": "main, .main, .content, [class*='main'], [class*='content'], #app",
+  "extractSelector": null,
+  "minStableTextLength": 400,
+  "stablePollMs": 2500,
+  "stableConsecutiveNeeded": 5,
+  "scrollBodyToBottomBeforeRead": true,
+  "stripDomSelectors": [
+    "nav",
+    "aside",
+    "[class*='sider']",
+    "[class*='menu']",
+    "[class*='header']"
+  ],
+  "stripBeforeAny": []
+}

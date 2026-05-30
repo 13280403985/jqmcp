@@ -1,0 +1,36 @@
+{
+  "_comment": "消费场景分析：https://research.meritco-group.com/report/mec — 单输入框 + 回车 / 点搜索；首次跑通后按需把 bodySelector 改为 DevTools 复制的具体选择器。",
+  "startUrl": "https://research.meritco-group.com/report/mec",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0",
+  "searchInputSelectors": [
+    "input[placeholder*='请输入品类']",
+    "input[placeholder*='品类/品牌']",
+    "input[placeholder*='防晒霜']",
+    "input[type='text']",
+    "textarea[placeholder*='请输入品类']",
+    "textarea[placeholder*='品类/品牌']"
+  ],
+  "submitWithEnter": true,
+  "submitSelector": null,
+  "waitUntil": "load",
+  "afterSubmitPauseMs": 1500,
+  "dismissAuxiliaryText": "跳过",
+  "dismissAuxiliaryWaitMs": 30000,
+  "postDismissPauseMs": 4000,
+  "navigationTimeoutMs": 90000,
+  "generationTimeoutMs": 600000,
+  "bodySelector": "main, .main, .content, [class*='main'], [class*='content'], #app",
+  "extractSelector": null,
+  "minStableTextLength": 600,
+  "stablePollMs": 2500,
+  "stableConsecutiveNeeded": 5,
+  "scrollBodyToBottomBeforeRead": true,
+  "stripDomSelectors": [
+    "nav",
+    "aside",
+    "[class*='sider']",
+    "[class*='menu']",
+    "[class*='header']"
+  ],
+  "stripBeforeAny": ["目标人群画像", "深度思考", "搜索方式", "理论基础", "概述"]
+}

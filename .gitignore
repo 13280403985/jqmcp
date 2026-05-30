@@ -7,3 +7,4 @@ meritco-chromium-profile/
 meritco.http.json
 meritco.playwright.json
 *.har
+.jqmcp/

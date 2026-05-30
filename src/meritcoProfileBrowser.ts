@@ -1,6 +1,6 @@
 /**
  * 有头打开久谦 bot，使用持久化 Chromium 用户目录：在此窗口登录一次后，
- * 配置 MERITCO_USE_PERSIST_PROFILE=1（或 MERITCO_CHROMIUM_USER_DATA 指向同一路径）即可让 MCP 无头复用会话，无需再抄 Cookie/Token。
+ * MCP 通用查询默认即会复用该目录（或 MERITCO_CHROMIUM_USER_DATA 指向的目录），无需再抄 Cookie/Token。
  */
 import { chromium } from "playwright";
 import { loadMeritcoLocalEnv } from "./loadMeritcoLocalEnv.js";
@@ -19,7 +19,7 @@ async function main(): Promise<void> {
 
   console.error(`[jqmcp-profile] 用户数据目录: ${userDataDir}`);
   console.error(
-    `[jqmcp-profile] 若首次使用，登录成功后请在 meritco.local.env 增加一行：MERITCO_USE_PERSIST_PROFILE=1（或 MERITCO_CHROMIUM_USER_DATA=${userDataDir.replace(/\\/g, "\\\\")}）`,
+    `[jqmcp-profile] 若需自定义目录，可在 meritco.local.env 设：MERITCO_CHROMIUM_USER_DATA=${userDataDir.replace(/\\/g, "\\\\")}`,
   );
   if (profileDirExists(userDataDir)) {
     console.error(`[jqmcp-profile] 检测到已有 ${MERITCO_CHROMIUM_PROFILE_DIRNAME}，将复用其中会话。`);

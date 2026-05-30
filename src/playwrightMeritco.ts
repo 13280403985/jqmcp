@@ -52,14 +52,11 @@ function assertNotLoginPage(page: Page, phase: string): void {
   console.error(`[jqmcp-playwright] ${phase} 当前 URL: ${url}`);
   throw new Error(
     "久谦当前要求登录，Playwright 未带上有效登录态。\n\n" +
-      "请任选其一：\n" +
-      "A) 同一 PowerShell 窗口设置后重试：\n" +
-      '   $env:MERITCO_COOKIE = "整段 Cookie"\n' +
-      '   $env:MERITCO_TOKEN  = "请求头 Token（有则必填）"\n' +
-      "B) Cookie 太长被终端截断时：把**一行** Cookie 存成文件，设 $env:MERITCO_COOKIE_FILE=\"C:\\\\path\\\\cookie.txt\"\n" +
-      "C) 最省事：在项目目录 `npm run build && npm run meritco:profile`，弹出 Chromium 内登录并进 bot，终端按回车退出；再在 meritco.local.env 设 MERITCO_USE_PERSIST_PROFILE=1（可不再用 Cookie）。\n" +
-      "D) 旧方式：`npx playwright codegen https://research.meritco-group.com/report/custom/bot --save-storage=meritco-auth.json`… 再设 $env:MERITCO_STORAGE_STATE=…\n\n" +
-      "Cookie/Token 仍从：已登录浏览器 → F12 → Network → 选 research.meritco-group.com 的请求 → 请求标头复制。",
+      "请先在本机完成一次持久化登录：\n" +
+      "1) 在项目目录执行 `npm run build && npm run meritco:profile`\n" +
+      "2) 弹出 Chromium 后登录并进入 bot\n" +
+      "3) 终端按回车关闭浏览器，再重试工具调用\n\n" +
+      "通用查询默认只走持久化 profile（meritco-chromium-profile），不会主动要求你维护 Cookie/Token。",
   );
 }
 
@@ -233,7 +230,7 @@ async function resolveSearchInput(
   }
 
   throw new Error(
-    `在 ${budgetMs}ms 内未找到可用搜索输入框。请：1) meritco.playwright.json 配置 searchInputSelectors 或更新选择器；2) 设 MERITCO_PLAYWRIGHT_HEADLESS=0 弹出浏览器对照 DevTools 排查；3) 确认 MERITCO_COOKIE/TOKEN 有效（未跳登录）。当前 URL：${page.url()}`,
+    `在 ${budgetMs}ms 内未找到可用搜索输入框。请：1) meritco.playwright.json 配置 searchInputSelectors 或更新选择器；2) 设 MERITCO_PLAYWRIGHT_HEADLESS=0 弹出浏览器对照 DevTools 排查；3) 先执行 npm run meritco:profile 确认该 profile 登录有效。当前 URL：${page.url()}`,
   );
 }
 
@@ -558,7 +555,7 @@ export async function runUniversalSearchPlaywright(query: string): Promise<strin
           "1) **无桌面仍强制有头**：去掉 `MERITCO_PLAYWRIGHT_HEADLESS=0`，保持默认无头；若仍异常可试 `MERITCO_PLAYWRIGHT_DISABLE_GPU=1`。\n" +
           "2) **用户目录被占用**：关闭其它正在使用该 profile 的 Chromium 窗口（含未关的 meritco:profile）。\n" +
           "3) **杀毒/策略拦截** playwright 自带的 chromium.exe。\n" +
-          "4) 临时绕过：设 `MERITCO_USE_PERSIST_PROFILE=0` 并改用 MERITCO_COOKIE / MERITCO_STORAGE_STATE。\n" +
+          "4) 重新执行 `npm run meritco:profile` 刷新该目录内登录态。\n" +
           "5) **并发**：避免同时对同一 profile 发起两次通用查询（会争用用户目录锁）。",
       );
     }
@@ -571,7 +568,6 @@ export async function runUniversalSearchPlaywright(query: string): Promise<strin
           "[jqmcp-playwright] 未找到 meritco storage 合并源（MERITCO_STORAGE_STATE 或 meritco-auth.json）；仅依赖 profile 目录内登录态。",
         );
       }
-      await mergeOptionalEnvCookies(context, cfg);
       const page = context.pages()[0] ?? (await context.newPage());
       page.setDefaultTimeout(cfg.navigationTimeoutMs);
       return await executeMeritcoUniversalQuery(page, cfg, query, { syncTokenFromPageAfterOrigin: true });
